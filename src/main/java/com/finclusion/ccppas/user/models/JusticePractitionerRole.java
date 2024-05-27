@@ -1,10 +1,12 @@
 package com.finclusion.ccppas.user.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
+@SuperBuilder
 @Entity
 public class JusticePractitionerRole {
 
@@ -19,9 +22,11 @@ public class JusticePractitionerRole {
     @GeneratedValue
     @Column(name = "role_id")
     private Long id;
+    @Column(unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "role")
+    @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private List<JusticePractitioner> justicePractitioners;
 
     public JusticePractitionerRole(String name) {

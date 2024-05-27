@@ -1,5 +1,6 @@
 package com.finclusion.ccppas.user.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,9 +21,11 @@ public class LawEnforcerRole {
     @GeneratedValue
     @Column(name = "role_id")
     private Long id;
+    @Column(unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "roles")
+    @JsonIgnore
     private List<LawEnforcer> lawEnforcers;
 
     public LawEnforcerRole(String name) {

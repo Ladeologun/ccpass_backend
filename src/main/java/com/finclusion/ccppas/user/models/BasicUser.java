@@ -5,7 +5,10 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -14,7 +17,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @MappedSuperclass
 @SuperBuilder
-public abstract class BasicUser {
+@EntityListeners(AuditingEntityListener.class)
+public abstract class BasicUser implements UserDetails, Principal {
 
     @Id
     @GeneratedValue
@@ -22,7 +26,7 @@ public abstract class BasicUser {
     private Long id;
 
     @Column(unique = true,length = 20)
-    private String unique_id;
+    private String uniqueId;
     @Column(length = 20)
     private String firstname;
     @Column(length = 20)
@@ -56,7 +60,7 @@ public abstract class BasicUser {
 
 
     public BasicUser(String unique_id, String firstname, String lastname, String email) {
-        this.unique_id = unique_id;
+        this.uniqueId = unique_id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
