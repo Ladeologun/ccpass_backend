@@ -4,7 +4,7 @@ import com.finclusion.ccppas.crimecase.models.CrimeCase;
 import com.finclusion.ccppas.justice.actionlog.JusticeActionLog;
 import com.finclusion.ccppas.justice.chat.Chat;
 import com.finclusion.ccppas.justice.chat.Message;
-import com.finclusion.ccppas.justice.permission.JusticePermission;
+import com.finclusion.ccppas.justice.permission.models.JusticePermission;
 import com.finclusion.ccppas.justice.task.JusticeTask;
 import jakarta.persistence.*;
 import lombok.*;

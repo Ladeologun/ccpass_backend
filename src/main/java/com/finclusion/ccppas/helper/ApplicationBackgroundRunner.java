@@ -53,9 +53,14 @@ public class ApplicationBackgroundRunner implements CommandLineRunner {
                 .status(UserStatus.ACTIVE)
                 .roles(List.of(user))
                 .build();
+        if (!justicePractitionerRepository.existsByEmail(super_admin.getEmail())){
+            justicePractitionerRepository.save(super_admin);
+        }
+        if (!justicePractitionerRepository.existsByEmail(regular_user.getEmail())){
+            justicePractitionerRepository.save(regular_user);
+        }
 
-        justicePractitionerRepository.save(super_admin);
-        justicePractitionerRepository.save(regular_user);
+
     }
 
 

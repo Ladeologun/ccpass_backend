@@ -7,13 +7,13 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RegisterRequestDto {
 
     @Email(message = "email is not valid")
@@ -39,8 +39,8 @@ public class RegisterRequestDto {
     @NotEmpty(message = "bvn cannot be empty")
     @NotBlank(message = "bvn cannot be blank")
     @Size(min = 11, message = "bvn should be more than 10 characters")
-
     private String bvn;
+
     @NotEmpty(message = "nin cannot be empty")
     @NotBlank(message = "nin cannot be blank")
     @Size(min = 11, message = "nin should be more than 10 characters")
