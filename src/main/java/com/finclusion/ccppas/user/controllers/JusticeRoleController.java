@@ -4,6 +4,7 @@ package com.finclusion.ccppas.user.controllers;
 import com.finclusion.ccppas.user.dtos.AddRoleRequestDto;
 import com.finclusion.ccppas.user.dtos.AddRoleResponseDto;
 import com.finclusion.ccppas.user.services.JusticeRoleService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ public class JusticeRoleController {
 
     private final JusticeRoleService justiceRoleService;
 
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/roles")
     public ResponseEntity<AddRoleResponseDto> addRole(
             @RequestBody @Valid AddRoleRequestDto request

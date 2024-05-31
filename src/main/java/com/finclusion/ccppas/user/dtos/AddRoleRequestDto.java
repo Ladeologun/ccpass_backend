@@ -14,6 +14,5 @@ public class AddRoleRequestDto {
 
     @NotEmpty(message = "name cannot be empty")
     @NotBlank(message = "name cannot be blank")
-    @JsonProperty("fmoj_id")
     private String name;
 }

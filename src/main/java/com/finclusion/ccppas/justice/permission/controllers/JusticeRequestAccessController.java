@@ -5,6 +5,7 @@ import com.finclusion.ccppas.justice.permission.dtos.GrantAccessResponseDto;
 import com.finclusion.ccppas.justice.permission.dtos.RequestAccessDto;
 import com.finclusion.ccppas.justice.permission.dtos.RequestAccessResponseDto;
 import com.finclusion.ccppas.justice.permission.services.JusticeRequestAccessService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ public class JusticeRequestAccessController {
         return ResponseEntity.ok(justiceRequestAccessService.justiceRequestAccess(request));
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @PutMapping ("/grant-access")
     @PreAuthorize("hasAnyRole('SUPER_ADMIN','ADMIN')")
     public ResponseEntity<GrantAccessResponseDto> grantAccess(

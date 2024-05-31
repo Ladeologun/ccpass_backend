@@ -10,9 +10,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.security.SecureRandom;
 import java.util.List;
-import java.util.Random;
+
 
 @Component
 @RequiredArgsConstructor
@@ -36,20 +35,20 @@ public class ApplicationBackgroundRunner implements CommandLineRunner {
 
         var super_admin = JusticePractitioner.builder()
                 .email("superadmin@gmail.com")
-                .firstname("oluwadahunsi")
-                .lastname("mojigbotoluwa")
-                .uniqueId(generateFmojId())
-                .password(passwordEncoder.encode("12345666764565"))
+                .firstname("dancing")
+                .lastname("freeman")
+                .uniqueId("FMOJ11111111")
+                .password(passwordEncoder.encode("00000000"))
                 .status(UserStatus.ACTIVE)
                 .roles(List.of(superAdmin))
                 .build();
         System.out.println(super_admin.getUniqueId());
         var regular_user = JusticePractitioner.builder()
                 .email("regularuser@gov.ng")
-                .firstname("omolade")
-                .lastname("mojigbotoluwa")
-                .uniqueId(generateFmojId())
-                .password(passwordEncoder.encode("123456667645"))
+                .firstname("badboy")
+                .lastname("ladelowski")
+                .uniqueId("FMOJ22222222")
+                .password(passwordEncoder.encode("00000000"))
                 .status(UserStatus.ACTIVE)
                 .roles(List.of(user))
                 .build();
@@ -63,18 +62,4 @@ public class ApplicationBackgroundRunner implements CommandLineRunner {
 
     }
 
-
-    private String generateFmojId (){
-        final String ID_PREFIX = "FMOJ";
-        final Random RANDOM = new SecureRandom();
-        String fmojid;
-        do {
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < 8; i++) {builder.append(RANDOM.nextInt(10));}
-            fmojid = ID_PREFIX + builder.toString();
-
-        }while(justicePractitionerRepository.existsByUniqueId(fmojid));
-
-        return fmojid;
-    }
 }
