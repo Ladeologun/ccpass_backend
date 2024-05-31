@@ -39,6 +39,10 @@ public class SecurityConfiguration {
 //            "/api/v1/justice/authenticate",
 //            "/api/v1/justice/auth/register",
             "/api/v1/justice/auth/login",
+            "/api/v1/justice/permission/request-access",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
 //            "/error"
 //            "/api/v1/justice/request-access",
 //            "/api/v1/law-enforce/authenticate",

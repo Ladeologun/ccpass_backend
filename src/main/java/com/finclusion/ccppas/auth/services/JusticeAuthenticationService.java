@@ -44,7 +44,7 @@ public class JusticeAuthenticationService {
                 .bvn(requestDto.getBvn())
                 .nin(requestDto.getNin())
                 .supervisor(supervisor.get())
-                .status(UserStatus.ACTIVE)
+                .status(UserStatus.PENDING)
                 .password(passwordEncoder.encode(requestDto.getPassword()))
                 .build();
         var savedUser = justicePractitionerRepository.save(newUser);

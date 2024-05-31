@@ -1,4 +1,4 @@
-package com.finclusion.ccppas.justice.permission;
+package com.finclusion.ccppas.justice.permission.models;
 
 
 import com.finclusion.ccppas.user.models.JusticePractitioner;
@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class JusticePermission {
 
     @Id

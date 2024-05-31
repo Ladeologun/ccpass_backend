@@ -3,12 +3,14 @@ package com.finclusion.ccppas.helper;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
 @RestControllerAdvice
@@ -48,6 +50,24 @@ public class GlobalExecptionHandler {
         return ResponseEntity.badRequest().body(applicationException);
 
     }
+
+    @ExceptionHandler(value = {DateTimeParseException.class, HttpMessageNotReadableException.class})
+    public ResponseEntity<?> handleDateTimeParseException(Exception exp){
+        String message = "Date format is not valid";
+        ApplicationException applicationException = new ApplicationException(message, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(applicationException);
+
+    }
+
+    @ExceptionHandler(value = {CustomRuntimeException.class})
+    public ResponseEntity<?> handleCustomRuntimeException(CustomRuntimeException exp){
+        var errors = exp.getErrors();
+        var message = exp.getMessage();
+        ApplicationException applicationException = new ApplicationException(false,message,errors,HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(applicationException);
+
+    }
+
 
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<?> handleGlobalException(Exception exp){
