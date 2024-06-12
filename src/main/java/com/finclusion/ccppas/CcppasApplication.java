@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class CcppasApplication {
 
 	public static void main(String[] args) {
+		System.out.println("test git issue");
 		SpringApplication.run(CcppasApplication.class, args);
 	}
 
