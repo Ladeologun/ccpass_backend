@@ -17,6 +17,12 @@ spring:
         format-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  logging:
+    level:
+      root: INFO
+      org.springframework.security: DEBUG
+      org.springframework.security.authentication.dao.DaoAuthenticationProvider: DEBUG
 #  mvc:
 #    format:
 #      date: dd-MM-yyyy

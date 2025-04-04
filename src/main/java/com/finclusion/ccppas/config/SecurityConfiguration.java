@@ -60,7 +60,7 @@ public class SecurityConfiguration {
                             .authenticated()
             )
             .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationManager(authManager)
+            .authenticationManager(authenticationManager(http))
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

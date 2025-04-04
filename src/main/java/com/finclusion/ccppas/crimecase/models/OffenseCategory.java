@@ -1,6 +1,5 @@
 package com.finclusion.ccppas.crimecase.models;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,23 +16,15 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Offense {
+public class OffenseCategory {
 
     @Id
     @GeneratedValue
-    @Column(name = "offense_id")
     private Long id;
-    private String type;
+    private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "offense")
-    private OffenseCategory offenseCategory;
-
-//    @Enumerated(EnumType.STRING)
-//    private OffenseType type;
-
-    @OneToMany(mappedBy = "offense")
-    private List<CrimeCase> crimeCases;
+    @OneToMany(mappedBy = "offenseCategory")
+    private List<Offense> offenses;
 
     @CreatedDate
     @Column(name = "created_at",nullable = false,updatable = false)

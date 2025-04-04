@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -53,6 +54,14 @@ public class GlobalExecptionHandler {
 
     @ExceptionHandler(value = {DateTimeParseException.class, HttpMessageNotReadableException.class})
     public ResponseEntity<?> handleDateTimeParseException(Exception exp){
+        String message = "Date format is not valid";
+        ApplicationException applicationException = new ApplicationException(message, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(applicationException);
+
+    }
+
+    @ExceptionHandler(value = {AuthenticationException.class,})
+    public ResponseEntity<?> handleAUthencation(AuthenticationException exp){
         String message = "Date format is not valid";
         ApplicationException applicationException = new ApplicationException(message, HttpStatus.BAD_REQUEST);
         return ResponseEntity.badRequest().body(applicationException);

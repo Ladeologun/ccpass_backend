@@ -1,6 +1,7 @@
-package com.finclusion.ccppas.crimecase.models;
+package com.finclusion.ccppas.justice.agency.models;
 
 
+import com.finclusion.ccppas.justice.global.models.LocationState;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,30 +11,29 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class Offense {
+public class AgencyLocation {
 
     @Id
     @GeneratedValue
-    @Column(name = "offense_id")
+    @Column(name = "location_id")
     private Long id;
-    private String type;
+    private String code;
+    private String address;
+    private String localGovernment;
+    private String geoLocation;
+
+    @Enumerated(EnumType.STRING)
+    private LocationState state;
 
     @ManyToOne
-    @JoinColumn(name = "offense")
-    private OffenseCategory offenseCategory;
-
-//    @Enumerated(EnumType.STRING)
-//    private OffenseType type;
-
-    @OneToMany(mappedBy = "offense")
-    private List<CrimeCase> crimeCases;
+    @JoinColumn(name = "agency_id")
+    private Agency agency;
 
     @CreatedDate
     @Column(name = "created_at",nullable = false,updatable = false)

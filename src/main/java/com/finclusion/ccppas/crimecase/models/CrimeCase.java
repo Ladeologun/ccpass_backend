@@ -1,8 +1,9 @@
 package com.finclusion.ccppas.crimecase.models;
 
 
+import com.finclusion.ccppas.justice.agency.models.Agency;
 import com.finclusion.ccppas.justice.court.Court;
-import com.finclusion.ccppas.justice.department.JusticeDepartment;
+//import com.finclusion.ccppas.justice.department.JusticeDepartment;
 import com.finclusion.ccppas.user.models.JusticePractitioner;
 import com.finclusion.ccppas.user.models.LawEnforcer;
 import jakarta.persistence.*;
@@ -36,9 +37,13 @@ public class CrimeCase {
     @JoinColumn(name = "offense_id")
     private Offense offense;
 
+//    @ManyToOne
+//    @JoinColumn(name = "department_id")
+//    private JusticeDepartment department;
+
     @ManyToOne
-    @JoinColumn(name = "department_id")
-    private JusticeDepartment department;
+    @JoinColumn(name = "agency_id")
+    private Agency agency;
 
     @ManyToOne
     @JoinColumn(name = "court_id")
@@ -59,6 +64,8 @@ public class CrimeCase {
     private String knownAssociate;
     private String legalBases;
     private String particularsOfOffence;
+
+
     @Lob
     @Column(columnDefinition = "TEXT")
     private String chargeDetails;
