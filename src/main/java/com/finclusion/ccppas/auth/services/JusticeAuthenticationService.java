@@ -11,7 +11,9 @@ import com.finclusion.ccppas.user.repositories.JusticePractitionerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -60,14 +62,25 @@ public class JusticeAuthenticationService {
 
 
     public LoginResponseDto authenticateUser(LoginRequestDto request) {
-        var auth  = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUniqueId(), request.getPassword())
-        );
-        var claims = new HashMap<String, Object>();
-        var user = ((JusticePractitioner)auth.getPrincipal());
-        claims.put("fullName", user.fullName());
-        var jwtToken = jwtService.generateToken(claims, user);
-        return LoginResponseDto.builder().token(jwtToken).build();
+        try{
+            var auth  = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getUniqueId(), request.getPassword())
+            );
+            System.out.println("something going on-----------------jsjsj");
+            System.out.println(auth);
+            var claims = new HashMap<String, Object>();
+            var user = ((JusticePractitioner)auth.getPrincipal());
+            claims.put("fullName", user.fullName());
+            var jwtToken = jwtService.generateToken(claims, user);
+            return LoginResponseDto.builder().token(jwtToken).build();
+        }catch (BadCredentialsException e) {
+//            throw new BadCredentialsException("Bad username or password", e);
+            System.out.println("erororororrrrr-----------------jsjsj");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad credentials");
+        }catch (AuthenticationException e) {
+            System.out.println("erororororrrrr-----------------jsjsj");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad credentials");
+        }
     }
 
 
